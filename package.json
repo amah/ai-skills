@@ -1,0 +1,15 @@
+{
+  "name": "ai-skills-installer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Install built ai-skills into a destination project. Run via bun, node 22 (--experimental-strip-types), or tsx.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "install:skill": "node --experimental-strip-types --no-warnings scripts/install.ts",
+    "install:skill:bun": "bun scripts/install.ts",
+    "typecheck": "node --experimental-strip-types --no-warnings --check scripts/install.ts || tsc --noEmit -p tsconfig.json"
+  }
+}

@@ -16,10 +16,21 @@ in `dist/` (gitignored).
 > 32 KiB. The Codex adapter fails the build at 30 KiB so you have headroom. Curate
 > `targets:` per skill instead of defaulting all skills to all four tools.
 
+## Toolchain
+
+The repo is **hybrid**:
+
+- **Authoring tools** (lint, build, eval) are written in **Python 3.10+**. They run
+  on the skill maintainer's machine and need only `pyyaml` and (for eval) `anthropic`.
+- **The installer** (`scripts/install.ts`) is written in **TypeScript** with **zero
+  npm dependencies**. It runs on the consumer's machine via `bun` or
+  `node --experimental-strip-types` (Node 22+) so end users don't need a Python
+  install just to copy a few files.
+
 ## Quick start
 
 ```bash
-# 1. Install dependencies (Python 3.10+)
+# 1. Install authoring dependencies (Python 3.10+)
 pip install -e .
 
 # 2. Lint your skills
@@ -29,9 +40,12 @@ python -m scripts.lint
 python -m scripts.build --target all
 
 # 4. Install one target into a destination project
-python -m scripts.install --target claude --dest ~/my-project
-python -m scripts.install --target claude --dest ~/my-project --skill database-access
-python -m scripts.install --target claude --dest ~/my-project --dry-run
+bun scripts/install.ts                                          # interactive wizard
+bun scripts/install.ts -t claude -d ~/my-project
+bun scripts/install.ts -t claude -d ~/my-project -s database-access
+bun scripts/install.ts -t claude -d ~/my-project --dry-run
+# Or, if you don't have bun:
+node --experimental-strip-types scripts/install.ts -t claude -d ~/my-project
 
 # 5. Run golden-prompt evals (needs ANTHROPIC_API_KEY)
 python -m scripts.eval database-access
@@ -62,7 +76,7 @@ ai-skills/
 ├── scripts/
 │   ├── lint.py
 │   ├── build.py
-│   ├── install.py
+│   ├── install.ts          # ← TypeScript, zero-dep, runs via bun or node 22+
 │   ├── eval.py
 │   └── adapters/{base,claude_code,opencode,roo_code,codex}.py
 └── dist/                      # gitignored, build output (one subdir per target)

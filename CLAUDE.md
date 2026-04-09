@@ -57,9 +57,11 @@ roo_mode: <slug>                  # optional, routes into .roo/rules-<slug>/ + w
 python -m scripts.lint                                  # validate all skills
 python -m scripts.build --target all                    # build all targets into dist/
 python -m scripts.build --target claude                 # build a single target
-python -m scripts.install --target claude --dest <dir>  # copy dist/claude/ tree into <dir>
-python -m scripts.install --target claude --dest <dir> --skill <slug>  # install one skill
-python -m scripts.install --target claude --dest <dir> --dry-run       # preview without writing
+bun scripts/install.ts                                            # interactive wizard (no args)
+bun scripts/install.ts -t claude -d <dir>                         # copy dist/claude/ tree into <dir>
+bun scripts/install.ts -t claude -d <dir> -s <slug>               # install one skill
+bun scripts/install.ts -t claude -d <dir> --dry-run               # preview without writing
+# Or run via Node 22 with no install: node --experimental-strip-types scripts/install.ts ...
 python -m scripts.eval <skill-slug>                     # run golden-prompt evals (needs ANTHROPIC_API_KEY)
 python -m scripts.eval <skill-slug> --update            # accept new snapshots
 ```
