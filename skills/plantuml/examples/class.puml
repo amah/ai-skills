@@ -1,0 +1,29 @@
+@startuml
+title Ordering domain - class
+class Customer {
+  +id: UUID
+  +email: String
+}
+class Order {
+  +id: UUID
+  +status: OrderStatus
+  +total(): Money
+}
+class OrderItem {
+  +quantity: Integer
+  +unitPrice: Money
+}
+class Product {
+  +sku: String
+  +name: String
+}
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+Customer "1" -- "0..*" Order : places
+Order "1" *-- "1..*" OrderItem : contains
+OrderItem "*" --> "1" Product : references
+Order --> OrderStatus
+@enduml

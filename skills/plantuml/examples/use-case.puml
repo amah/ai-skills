@@ -1,0 +1,18 @@
+@startuml
+title Ordering platform - use cases
+left to right direction
+actor Customer
+actor "Support Agent" as Support
+rectangle "Ordering Platform" {
+  usecase "Browse products" as Browse
+  usecase "Place order" as Place
+  usecase "Pay for order" as Pay
+  usecase "Track order" as Track
+  usecase "Issue refund" as Refund
+}
+Customer --> Browse
+Customer --> Place
+Customer --> Track
+Place ..> Pay : <<include>>
+Support --> Refund
+@enduml

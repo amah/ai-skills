@@ -1,0 +1,20 @@
+@startuml
+title Ordering platform - deployment
+node "Customer device" {
+  artifact "Browser" as Browser
+}
+cloud "Cloud environment" {
+  node "Web server" {
+    artifact "Web App" as Web
+  }
+  node "Application server" {
+    artifact "Order API" as API
+  }
+  database "Orders DB" as DB
+}
+cloud "Payment provider" as Payment
+Browser --> Web : HTTPS
+Web --> API : HTTPS
+API --> DB : SQL
+API --> Payment : HTTPS
+@enduml

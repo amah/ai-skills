@@ -1,0 +1,15 @@
+@startuml
+title Ordering platform - components
+skinparam componentStyle rectangle
+actor Customer
+component "Web App" as Web
+component "Order API" as API
+component "Payment Adapter" as Payment
+database "Orders DB" as DB
+cloud "Payment Provider" as Provider
+Customer --> Web
+Web --> API : HTTPS
+API --> DB : SQL
+API --> Payment : authorize()
+Payment --> Provider : HTTPS
+@enduml
