@@ -1,0 +1,14 @@
+@startuml
+title Order checkout - activity
+start
+:Review cart;
+:Enter shipping details;
+:Submit payment;
+if (Payment approved?) then (yes)
+  :Create order;
+  :Send confirmation;
+else (no)
+  :Show payment error;
+endif
+stop
+@enduml
