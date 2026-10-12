@@ -25,7 +25,7 @@ Create and maintain readable, correct PlantUML diagrams as text-based source fil
 2. Inspect any existing `.puml` files and preserve the project's naming, styling, includes, and conventions.
 3. Write minimal, legible PlantUML source bounded by `@startuml` and `@enduml`. Prefer stable identifiers, descriptive labels, and small coherent diagrams.
 4. Use only relationships, actors, components, and transitions supported by the user's information. Clearly label assumptions rather than inventing system facts.
-5. Check syntax against the official documentation for the selected diagram type. When a local PlantUML CLI or compatible renderer is available, render the diagram and resolve errors; otherwise say validation was not run.
+5. Check syntax against the bundled offline references in `references/` for the selected diagram type; consult the official website only when network access is available and needed. When a local PlantUML CLI or compatible renderer is available, render the diagram and resolve errors; otherwise say validation was not run.
 6. Return the `.puml` source or update the requested file, and briefly explain non-obvious modeling choices.
 
 ## Constraints
@@ -51,3 +51,16 @@ Create and maintain readable, correct PlantUML diagrams as text-based source fil
 ## Examples
 
 - [Diagram examples](references/diagram-examples.md) — load this reference to select and adapt an editable `.puml` example for each supported diagram type.
+
+## Offline documentation
+
+- [Offline authoring guide](references/offline-guide.md) — file format, styling, preprocessing, rendering, troubleshooting, and safety.
+- [Sequence syntax](references/sequence-syntax.md)
+- [Class syntax](references/class-syntax.md)
+- [Activity syntax](references/activity-syntax.md)
+- [Component syntax](references/component-syntax.md)
+- [Deployment syntax](references/deployment-syntax.md)
+- [State syntax](references/state-syntax.md)
+- [Use-case syntax](references/use-case-syntax.md)
+
+Use these bundled files first. External documentation links are supplementary and are not required for the covered workflows.
