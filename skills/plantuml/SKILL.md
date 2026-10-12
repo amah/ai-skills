@@ -47,3 +47,7 @@ Create and maintain readable, correct PlantUML diagrams as text-based source fil
 - State diagrams: https://plantuml.com/state-diagram
 - Use-case diagrams: https://plantuml.com/use-case-diagram
 - Command line: https://plantuml.com/command-line
+
+## Examples
+
+- [Diagram examples](references/diagram-examples.md) — load this reference to select and adapt an editable `.puml` example for each supported diagram type.
