@@ -1,0 +1,22 @@
+@startuml
+title Place an order - sequence
+actor Customer
+participant "Web App" as Web
+participant "Order API" as API
+database "Orders DB" as DB
+participant "Payment Gateway" as Pay
+Customer -> Web: Submit cart
+Web -> API: POST /orders
+API -> Pay: Authorize payment
+alt Payment approved
+  Pay --> API: Authorization ID
+  API -> DB: Save order
+  DB --> API: Order ID
+  API --> Web: 201 Created
+  Web --> Customer: Show confirmation
+else Payment declined
+  Pay --> API: Declined
+  API --> Web: 402 Payment Required
+  Web --> Customer: Show payment error
+end
+@enduml
