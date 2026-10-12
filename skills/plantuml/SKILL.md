@@ -64,3 +64,5 @@ Create and maintain readable, correct PlantUML diagrams as text-based source fil
 - [Use-case syntax](references/use-case-syntax.md)
 
 Use these bundled files first. External documentation links are supplementary and are not required for the covered workflows.
+
+- [Stereotypes](references/stereotypes.md) — UML extension labels, diagram-specific usage, naming conventions, and styling.
