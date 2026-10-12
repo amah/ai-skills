@@ -76,3 +76,70 @@ Stereotype-specific `skinparam` behavior and the newer style system vary by Plan
 ## Validation
 
 Check the local PlantUML version when styling or applying stereotypes to less-common elements. Run `plantuml -checkonly file.puml` when available; otherwise render locally and inspect the output. No example in this reference should be assumed renderer-validated merely because it is documented.
+
+
+## Step-by-step: create and reuse a custom stereotype
+
+1. Choose a meaningful project-specific label, e.g. `<<domain-service>>`. No separate registration statement is required: the label is introduced by attaching it to an element.
+2. Apply it to a supported element with `class OrderService <<domain-service>>`.
+3. Optionally configure stereotype-specific presentation using `skinparam` before the element declarations.
+4. Reuse the same exact spelling in other declarations. To share styling across files offline, place local `skinparam` settings in a checked-in `.puml` file and include it via a local `!include` directive.
+5. Document the stereotype's intended meaning in project documentation. PlantUML does not validate the semantic meaning of a custom stereotype.
+
+### Complete custom stereotype example
+
+```plantuml
+@startuml
+skinparam class {
+  BackgroundColor<<domain-service>> #E8F1FF
+  BorderColor<<domain-service>> #2455A4
+}
+class OrderService <<domain-service>> {
+  +placeOrder(): void
+}
+class PaymentService <<domain-service>>
+OrderService --> PaymentService
+@enduml
+```
+
+**Important syntax detail:** In stereotype-specific skin parameters, write `BackgroundColor<<domain-service>>` without a space between the property and `<<`. PlantUML's official class documentation explicitly warns that an intervening space can cause styling to be ignored.
+
+### Custom spot / icon for a class
+
+A class can use a custom single-letter spot with a color inside its stereotype:
+
+```plantuml
+@startuml
+class OrderService << (S,#FF7700) domain-service >>
+@enduml
+```
+
+This creates a colored spot marked `S` in supported versions; it is a presentation feature, not a UML semantic constraint.
+
+### Reusable offline styling
+
+Create `styles/stereotypes.puml`:
+
+```plantuml
+skinparam class {
+  BackgroundColor<<domain-service>> #E8F1FF
+  BorderColor<<domain-service>> #2455A4
+}
+```
+
+Then in a diagram stored at an appropriate relative path:
+
+```plantuml
+@startuml
+!include styles/stereotypes.puml
+class OrderService <<domain-service>>
+@enduml
+```
+
+The included file must exist relative to the diagram's include resolution context. Test the include path locally.
+
+### Official references (optional, for online verification)
+
+- https://plantuml.com/class-diagram — skinned stereotypes and custom spots
+- https://plantuml.com/sequence-diagram — stereotypes on participants
+- https://plantuml.com/use-case-diagram — actor and use-case stereotype styling
