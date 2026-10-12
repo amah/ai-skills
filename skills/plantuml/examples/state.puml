@@ -1,0 +1,12 @@
+@startuml
+title Order lifecycle - state
+[*] --> Pending : order created
+Pending --> Paid : payment approved
+Pending --> Cancelled : payment declined / cancelled
+Paid --> Fulfilled : shipped and delivered
+Paid --> Refunded : refund completed
+Fulfilled --> Refunded : return refunded
+Cancelled --> [*]
+Fulfilled --> [*]
+Refunded --> [*]
+@enduml
